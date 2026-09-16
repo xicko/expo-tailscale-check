@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "expo-tailscale-check": ["../src/index"],
+      "expo-tailscale-check/*": ["../src/*"]
+    }
+  }
+}
