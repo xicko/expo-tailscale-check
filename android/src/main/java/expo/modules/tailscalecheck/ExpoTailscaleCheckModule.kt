@@ -4,23 +4,40 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
 class ExpoTailscaleCheckModule : Module() {
+  private var detector: TailscaleDetector? = null
+
   override fun definition() = ModuleDefinition {
     Name("ExpoTailscaleCheck")
 
-    Events("onChange")
+    OnCreate {
+      val context = appContext.reactContext ?: return@OnCreate
 
-    Constant("PI") {
-      Math.PI
+      detector = TailscaleDetector(context) { state ->
+        sendEvent(
+          "onStateChange",
+          mapOf(
+            "state" to getTailscaleStateValue(state)
+          )
+        )
+      }
+      detector?.start()
     }
 
-    Function("hello") {
-      "Hello world! 👋"
+    OnDestroy {
+      detector?.stop()
+      detector = null
     }
 
-    AsyncFunction("setValueAsync") { value: String ->
-      sendEvent("onChange", mapOf(
-        "value" to value
-      ))
+    Events("onStateChange")
+
+    Function("getState") {
+      val state = detector?.getCurrentState()
+      getTailscaleStateValue(state)
+    }
+
+    Function("tailscaleInterface") {
+      val tsInterface = detector?.tailscaleInterface()
+      tsInterface
     }
   }
 }
