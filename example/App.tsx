@@ -1,5 +1,5 @@
 import ExpoTailscaleCheck, { useTailscaleState } from 'expo-tailscale-check';
-import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Platform, SafeAreaView, ScrollView, Text, View } from 'react-native';
 
 export default function App() {
   const state = useTailscaleState();
@@ -8,6 +8,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
+        {Platform.OS === 'android' ? <View style={{ height: 24 }} /> : null}
         <Text style={styles.header}>Tailscale Check</Text>
         <Group name="State">
           <Text style={styles.value}>{state}</Text>
