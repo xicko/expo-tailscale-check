@@ -1,6 +1,6 @@
 {
   "name": "expo-tailscale-check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Detect Tailscale usage in Expo and React Native apps",
   "main": "build/index.js",
   "types": "build/index.d.ts",
