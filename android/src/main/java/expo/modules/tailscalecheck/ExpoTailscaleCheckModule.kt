@@ -39,5 +39,23 @@ class ExpoTailscaleCheckModule : Module() {
       val tsInterface = detector?.tailscaleInterface()
       tsInterface
     }
+
+    Function("openTailscaleApp") { packageName: String? ->
+      val context = appContext.reactContext
+
+      if (context != null) openTailscaleApp(context, packageName)
+    }
+
+    Function("connectVPN") { packageName: String? ->
+      val context = appContext.reactContext
+
+      if (context != null) connectVPN(context, packageName)
+    }
+
+    Function("disconnectVPN") { packageName: String? ->
+      val context = appContext.reactContext
+
+      if (context != null) disconnectVPN(context, packageName)
+    }
   }
 }
