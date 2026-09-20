@@ -44,5 +44,11 @@ public class ExpoTailscaleCheckModule: Module {
       guard let interface = detector?.tailscaleInterface() else { return nil }
       return ["name": interface.name, "ip": interface.ip]
     }
+    
+    Function("openTailscaleApp") {}
+    
+    Function("connectVPN") {}
+    
+    Function("disconnectVPN") {}
   }
 }
